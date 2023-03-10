@@ -71,7 +71,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'goldShopper.wsgi.application'
-
+CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1']
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from .models import *
 from .serializers import *
 from rest_framework.response import Response
@@ -68,9 +67,54 @@ def Users_details(request,pk):
             return Response(serializers.data)
         return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
 
-    elif request.method == 'DELETE':
-        Users.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    # elif request.method == 'DELETE':
+    #     Users.delete()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET','PUT','DELETE'])
+def Company_Information_details(request,pk):
+    try:
+        users = Company_Information.objects.get(pk=pk)
+    except Company_Information.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializers = Company_InformationSerializers(Users)
+        return Response(serializers.data)
+
+    elif request.method == 'PUT':
+        serializers = Company_InformationSerializers(Users,request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+
+    # elif request.method == 'DELETE':
+    #     Company_Information.delete()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET','PUT','DELETE'])
+def Vendors_details(request,pk):
+    try:
+        users = Vendors.objects.get(pk=pk)
+    except Vendors.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializers = VendorsSerializers(Users)
+        return Response(serializers.data)
+
+    elif request.method == 'PUT':
+        serializers = VendorsSerializers(Users,request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+
+    # elif request.method == 'DELETE':
+    #     Vendors.delete()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
