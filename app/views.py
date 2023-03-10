@@ -61,15 +61,15 @@ def Users_details(request,pk):
         return Response(serializers.data)
 
     elif request.method == 'PUT':
-        serializers = UsersSerializers(Users,request.data)
+        serializers = UsersSerializers(Users,data= request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data)
         return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
 
-    # elif request.method == 'DELETE':
-    #     Users.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
+    elif request.method == 'DELETE':
+        users.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET','PUT','DELETE'])
@@ -80,19 +80,20 @@ def Company_Information_details(request,pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializers = Company_InformationSerializers(Users)
+        serializers = Company_InformationSerializers(Company_Information)
         return Response(serializers.data)
 
     elif request.method == 'PUT':
-        serializers = Company_InformationSerializers(Users,request.data)
+        serializers = Company_InformationSerializers(users,data= request.data)
         if serializers.is_valid():
             serializers.save()
+
             return Response(serializers.data)
         return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
 
-    # elif request.method == 'DELETE':
-    #     Company_Information.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
+    elif request.method == 'DELETE':
+        users.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET','PUT','DELETE'])
 def Vendors_details(request,pk):
@@ -102,19 +103,19 @@ def Vendors_details(request,pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializers = VendorsSerializers(Users)
+        serializers = VendorsSerializers(Vendors)
         return Response(serializers.data)
 
     elif request.method == 'PUT':
-        serializers = VendorsSerializers(Users,request.data)
+        serializers = VendorsSerializers(users,data= request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data)
         return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
 
-    # elif request.method == 'DELETE':
-    #     Vendors.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
+    elif request.method == 'DELETE':
+        users.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
