@@ -46,8 +46,8 @@ class Company_Information(models.Model):
 
 
 class Vendors(models.Model):
-    username = models.CharField(max_length=1000)
-    # username = models.ForeignKey(Users, on_delete=models.CASCADE, null=True)
+    # username = models.CharField(max_length=1000)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     company_name = models.ForeignKey(
         Company_Information, on_delete=models.CASCADE, null=True)
     address = models.CharField(max_length=1000)

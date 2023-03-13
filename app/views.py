@@ -1,5 +1,6 @@
 from .models import *
 from .serializers import *
+from user_auth.serializers import *
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -8,7 +9,7 @@ from rest_framework.decorators import api_view
 @api_view(['GET', 'POST'])
 def Users_list(request):
     if request.method == 'GET':
-        students = Users.objects.all()
+        students = User.objects.all()
         serializers = UsersSerializers(students, many=True)
         return Response(serializers.data)
 
@@ -53,39 +54,39 @@ def Vendors_list(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 def Users_details(request, pk):
     try:
-        users = Users.objects.get(pk=pk)
-    except Users.DoesNotExist:
+        users = User.objects.get(pk=pk)
+    except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializers = UsersSerializers(Users)
+        serializers = UsersSerializers(users)
         return Response(serializers.data)
 
     elif request.method == 'PUT':
-        serializers = UsersSerializers(Users, request.data)
+        serializers = UsersSerializers(users, request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        Users.delete()
+        User.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def Company_Information_details(request, pk):
     try:
-        users = Company_Information.objects.get(pk=pk)
+        company = Company_Information.objects.get(pk=pk)
     except Company_Information.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializers = Company_InformationSerializers(Users)
+        serializers = Company_InformationSerializers(company)
         return Response(serializers.data)
 
     elif request.method == 'PUT':
-        serializers = Company_InformationSerializers(Users, request.data)
+        serializers = Company_InformationSerializers(company, request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data)
@@ -99,16 +100,16 @@ def Company_Information_details(request, pk):
 @api_view(['GET', 'PUT', 'DELETE'])
 def Vendors_details(request, pk):
     try:
-        users = Vendors.objects.get(pk=pk)
+        vendor = Vendors.objects.get(pk=pk)
     except Vendors.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializers = VendorsSerializers(Users)
+        serializers = VendorsSerializers(vendor)
         return Response(serializers.data)
 
     elif request.method == 'PUT':
-        serializers = VendorsSerializers(Users, request.data)
+        serializers = VendorsSerializers(vendor, request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data)

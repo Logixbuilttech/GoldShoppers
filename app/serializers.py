@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from .models import *
 
-# class UsersSerializers(serializers.ModelSerializer):
-#     class Meta:
-#         model = Users
-#         fields = ['username', 'email', 'phone_number', 'role', 'description',]
+class UsersSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'phone_number', 'role', 'description',]
 
 
 # class users_roleSerializers(serializers.ModelSerializer):
