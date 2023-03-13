@@ -115,6 +115,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+CORS_ALLOW_HEADERS = [
+    'X-CSRFTOKEN',
+    'csrftoken',
+    'X-XSRF-TOKEN',
+    'content-type',
+    'x-requested-with',
+    'Authorization',
+    'Set-Cookie'
+]
+
 CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1','http://localhost:3000']
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
