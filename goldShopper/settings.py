@@ -125,7 +125,6 @@ CORS_ALLOW_HEADERS = [
     'Authorization',
     'Set-Cookie'
 ]
-
 CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1','http://localhost:3000']
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',

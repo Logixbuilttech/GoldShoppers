@@ -11,6 +11,8 @@ from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from user_auth.renderers import UserRenderer
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 # Generate Token
 def get_tokens_for_user(user):
@@ -33,6 +35,7 @@ class UserRegistrationView(APIView):
         return Response (serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class UserLogin(APIView):
     def post(self, request, format = None):
         serializer = UserLoginSerializer(data=request.data)
