@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from .models import *
 from .serializers import *
 from rest_framework.response import Response
