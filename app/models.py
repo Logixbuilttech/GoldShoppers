@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 import datetime
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import FileExtensionValidator
-
+from user_auth.models import User_data
 
 # class users_role(models.Model):
 #     role = models.CharField(max_length=100)
@@ -46,8 +46,7 @@ class Company_Information(models.Model):
 
 
 class Vendors(models.Model):
-    # username = models.CharField(max_length=1000)
-    username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    username = models.ForeignKey(User_data, on_delete=models.CASCADE, null=True)
     company_name = models.ForeignKey(
         Company_Information, on_delete=models.CASCADE, null=True)
     address = models.CharField(max_length=1000)

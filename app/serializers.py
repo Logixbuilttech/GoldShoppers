@@ -5,7 +5,7 @@ from user_auth.models import *
 class UsersSerializers(serializers.ModelSerializer):
     class Meta:
         model = User_data
-        fields = ['username', 'email', 'phone_number', 'role', 'description',]
+        fields = ['email', 'first_name', 'last_name', 'contact_no', 'role', 'description', 'password']
 
 
 # class users_roleSerializers(serializers.ModelSerializer):
@@ -24,3 +24,8 @@ class VendorsSerializers(serializers.ModelSerializer):
     class Meta:
         model = Vendors
         fields = "__all__"
+
+    def to_representation(self, instance):
+        data = super(VendorsSerializers, self).to_representation(instance)
+        print(instance)
+        return data
