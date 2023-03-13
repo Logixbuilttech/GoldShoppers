@@ -1,4 +1,5 @@
 from .models import *
+from user_auth.models import *
 from .serializers import *
 from user_auth.serializers import *
 from rest_framework.response import Response
@@ -9,7 +10,7 @@ from rest_framework.decorators import api_view
 @api_view(['GET', 'POST'])
 def Users_list(request):
     if request.method == 'GET':
-        students = User.objects.all()
+        students = User_data.objects.all()
         serializers = UsersSerializers(students, many=True)
         return Response(serializers.data)
 
@@ -54,8 +55,8 @@ def Vendors_list(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 def Users_details(request, pk):
     try:
-        users = User.objects.get(pk=pk)
-    except User.DoesNotExist:
+        users = User_data.objects.get(pk=pk)
+    except User_data.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
@@ -70,7 +71,7 @@ def Users_details(request, pk):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        User.delete()
+        User_data.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
